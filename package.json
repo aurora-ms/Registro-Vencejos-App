@@ -1,0 +1,12 @@
+{
+  "name": "registro_datos_vencejos_toledo",
+  "version": "1.0.0",
+  "description": "App para el registro y el seguimiento de aves (Vencejos)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Aurora MMS",
+  "license": "ISC"
+}
