@@ -1,0 +1,56 @@
+body {
+    margin: 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/*Estilos header*/
+
+header {
+    background-color: #1f1009;
+}
+
+.subdiv h1 {
+    color: white;
+    font-weight: 500;
+    position: relative;
+    right: 30px;
+    margin-bottom: 40px;
+    border-bottom: 4px solid white;
+    padding-bottom: 13px;
+}
+
+
+/*Estilos nav principal*/
+
+section#principal_menu {
+    height: 70px;
+    background-color: #a4a4ff;
+}
+
+.decoration {
+    width: 2px;
+    background: #1f10092e;
+    height: 44px;
+    transform: scaleX(-27);
+    transform-origin: left;
+}
+
+section#principal_menu a {
+    margin: 0 15px;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+    z-index: 2;
+}
+
+
+/*Estilos generales*/
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
