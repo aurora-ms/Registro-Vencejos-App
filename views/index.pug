@@ -11,7 +11,7 @@ head
 header
   div.flex
     div.subdiv
-      svg(viewbox='0,0,1702,1440' width='235' height='auto' version='1.1')
+      svg(viewbox='0,0,1702,1440' width='235' height='200' version='1.1')
         g
           path(d='M675.405,1292.4C686.305,1286.8 823.86,1201.15 896.405,1127.4C1014.1,1007.73 1067.18,883.117 1103.4,726.396C1116.3,721.896 1239.29,656.466 1270.36,640.002C1289.88,631.44 1285.4,629.538 1320.62,623.783C1315.3,617.495 1290.68,606.837 1272.98,598.63C1260.09,581.364 1212.5,541.996 1200.4,535.396C1187.4,528.996 1121.2,516.296 1103.4,513.396C1073.46,498.072 1115.98,460.21 1069.4,432.396C907.661,343.793 691.138,286.038 670.138,283.938C690.676,305.807 754.851,377.346 779.054,433.898C800.218,483.351 749.396,503.345 723.55,514.324C657.169,542.522 199.437,591.496 182.537,593.296C180.437,614.196 243.705,608.396 241.405,622.396C232.005,638.696 204.505,641.596 194.405,653.396C194.405,653.396 453.038,660.57 693.405,706.396C709.705,707.496 811.505,728.696 824.405,744.396C828.08,814.567 797.205,888.196 786.405,905.396C700.974,1088.37 668.305,1274.3 675.405,1292.4Z' stroke='#000000' stroke-width='3.75' stroke-linecap='round' fill='#33231f' stroke-linejoin='round' style='\
           fill: white;\
@@ -29,22 +29,33 @@ header
 nav
   section#principal_menu.flex
     a(href='/general_info') Información General
-    div.decoration
+    div#decoration
     a(href='/news') Noticias
 main
-  div
-    div
-      div
-        h3
-      div
-        h3
-  div
-    div
-      div
-        img(src='' alt='')
-      div
-        h4
-        p
-      div
-        div
-          h3
+  section#principal_section
+    div.principal_buttons.width_control
+      div.flex
+        button.active Inicio de sesión
+        button Registro de usuario
+      div#initsection.inputsecction
+        form
+          input(type="email", name="", placeholder="Email")
+          input(type="text", name="", placeholder="Contraseña")
+          input(type="submit", value="Iniciar sesión")
+      div#loginsection.inputsecction.invisible
+        form
+          input(type="text", name="", placeholder="Nombre completo")
+          input(type="email", name="", placeholder="Email")
+          input(type="text", name="", placeholder="Contraseña")
+          input(type="submit", value="Registrarme")
+    div#noregister_section
+      div.width_control
+        div.flex
+          div.subdiv
+            img(src='images/no_register_img.png' alt='')
+          div.subdiv
+            h3 Inscripción sin registro
+            p Si no te quieres hacer cuenta pero deseas inscribir a tu Vencejo no te preocupes, te lo ponemos facil, lo puedes hacer sin problema pinchando en el botón de abajo.
+        div.principal_buttons.complete
+            button Inscribir
+script(src="js/script.js")

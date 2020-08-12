@@ -28,12 +28,12 @@ section#principal_menu {
     background-color: #a4a4ff;
 }
 
-.decoration {
+#decoration {
     width: 2px;
     background: #1f10092e;
     height: 44px;
-    transform: scaleX(-27);
     transform-origin: left;
+    transition: all 0.5s ease-in-out;
 }
 
 section#principal_menu a {
@@ -46,11 +46,105 @@ section#principal_menu a {
 }
 
 
+/*Estilos botones*/
+
+div.principal_buttons button {
+    border: none;
+    padding: 20px 30px;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    font-weight: 600;
+    background-color: #9c9b9b;
+    color: #e2e2e2;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+    width: 240px;
+}
+
+.principal_buttons {
+    border: 2px solid #6d6ba5;
+}
+
+div.principal_buttons button:hover {
+    background-color: #414063;
+    color: #bfbfbf;
+}
+
+div.inputsecction {
+    margin: 20px;
+}
+
+div.inputsecction input {
+    width: 424px;
+    padding: 10px 0 10px 5px;
+    margin: 10px 0;
+}
+
+input[type="submit"] {
+    width: 433px!important;
+    padding: 10px 0px!important;
+    cursor: pointer;
+    font-family: Montserrat;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/*Estilos no register section*/
+
+div#noregister_section {
+    background: #d0d0f9;
+    padding: 10px 0px;
+}
+
+.subdiv img {
+    margin-right: 30px;
+}
+
+.subdiv h3 {
+    font-weight: 600;
+}
+
 /*Estilos generales*/
 
 .flex{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+}
+
+.active {
+    background-color: #6d6ba5!important;
+    color: white!important;
+}
+
+.active:hover {
+    background: #57567b!important;
+}
+
+:focus {
+    outline: none;
+}
+
+.invisible{
+    display: none;
+}
+
+.complete {
+    border: none!important;
+    margin-top: 20px;
+}
+
+.complete button{
+width: 100%!important;
+}
+
+.complete button:hover {
+    background-color: #6d6ba5!important;
+    color: white!important;
+}
+
+.width_control{
+    width: 480px;
+    margin: 30px auto;
 }
