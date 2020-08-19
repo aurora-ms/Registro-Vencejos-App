@@ -1,6 +1,5 @@
-const { generalInfoScrapper, newsScrapper } = require('./scrappers')
-const { save, saveInfo } = require('./functions')
-const got = require('got');
+const { generalInfoScrapper, newsScrapper } = require('../models/scrappers')
+const { save, saveInfo } = require('../dbFunctions/scrapFunctions')
 
 const saveInfoJob = () => generalInfoScrapper()
     .then((data) => {

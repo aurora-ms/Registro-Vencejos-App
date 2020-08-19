@@ -6,7 +6,7 @@ const { JSDOM } = jsdom;
 
 const got = require('got');
 
-const {clean, check} = require('./helpers')
+const {clean, check} = require('../middleware/scrapHelpers')
 
 
 const generalInfoScrapper = async () => {
@@ -31,10 +31,9 @@ const generalInfoScrapper = async () => {
             longitud: finalArray[1].textContent,
             envergadura: finalArray[2].textContent,
             identificacion: finalArray[3].textContent,
-            canto: finalArray[4].textContent
         };
 
-        writeFileSync("./functionalities/db/generalinfo.json", JSON.stringify(data, null, 2))
+        writeFileSync("./db/dbLowDb/generalinfo.json", JSON.stringify(data, null, 2))
         return data
     } else {
         return null
@@ -60,7 +59,7 @@ const newsScrapper = async () => {
         };
     })
 
-    writeFileSync("./functionalities/db/news.json", JSON.stringify(data, null, 2))
+    writeFileSync("./db/dbLowDb/news.json", JSON.stringify(data, null, 2))
     return data
 };
 

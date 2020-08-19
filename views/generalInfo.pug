@@ -1,0 +1,28 @@
+include components/commonHeader.pug
+section#general_info_section
+        .max-width
+            .flex
+                .subdiv
+                    img.infoimg1(src="images/vencejo_img.png" alt="")
+                .subdiv
+                    h4 Descripción
+                    p= indvData.descripcion
+                   
+                    .flex.justify_left
+                        div
+                            h5 Clasificación
+                            p= indvData.clasificacion
+                        div
+                            h5 Longitud
+                            p= indvData.longitud
+                        div
+                            h5 Envergadura
+                            p= indvData.envergadura
+        .diferentColor
+            .flex.max-width
+                .subdiv
+                    h4 Identificación
+                    p= indvData.identificacion        
+                .subdiv
+                    img.infoimg2(src="images/vencejo_img2.png" alt="")
+include components/scripts.pug

@@ -1,0 +1,14 @@
+include components/commonHeader.pug
+.flex.flex-flow
+    each indvData in data
+        a.indvLink(href= indvData.link )
+            .indvNew
+                .img_controler
+                    img(loading="lazy" src=indvData.img alt=indvData.alt)
+                .textNew
+                    
+                    h3= indvData.titulo
+                    span= indvData.fecha
+                    h4= indvData.except
+                a.indvButton(href= indvData.link ) Ver más
+include components/scripts.pug

@@ -10,8 +10,8 @@ function clean(oldArray) {
 
 function check() {
     try {
-        fs.statSync('./functionalities/db/generalinfo.json')
-        const checkData = fs.readFileSync('./functionalities/db/generalinfo.json');
+        fs.statSync('./db/dbLowDb/generalinfo.json')
+        const checkData = fs.readFileSync('./db/dbLowDb/generalinfo.json');
         var jsonData = JSON.parse(checkData);
         return jsonData.descripcion
 

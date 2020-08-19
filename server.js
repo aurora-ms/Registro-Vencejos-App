@@ -1,11 +1,14 @@
 require('dotenv').config()
 
-const { getAll } = require('./functionalities/scraping/functions')
-const { saveNewsJob, saveInfoJob } = require('./functionalities/scraping/scrapingJob')
+
+const { saveNewsJob, saveInfoJob } = require('./jobs/scrapingJob')
+const { generalInfoRoute, newsRoute } = require('./routes/index')
+
 
 const schedule = require('node-schedule');
 const express = require('express'),
     pug = require('pug');
+const routes = require('./routes/index');
 const app = express()
 
 app.use(express.static('public'));
@@ -13,24 +16,19 @@ app.use(express.static('public'));
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-    res.render('index.pug');
+app.get('/', (req, res) => { res.render('index'), saveInfoJob() });
 
-});
+app.get('/general_info', generalInfoRoute);
+app.get('/news', newsRoute);
 
-app.get('/general_info', (req, res) => {
-    res.render('index.pug');
-   
-    // const data = getAll()
-    // if (!data.length) {
-    //     return res.status(500).json({ msg: `Database is empty.` })
-    // }
-    // res.json(getAll())
+
+
+app.get('/error', (req, res) => {
+    res.render('error')
 });
 
 
-schedule.scheduleJob('* * * * * *', async () => {
-    await saveInfoJob()
+schedule.scheduleJob('32 01 * * * *', async () => {
     await saveNewsJob()
 
         .then(() => console.log("Database updated!"))
