@@ -46,3 +46,13 @@ buttons[1].addEventListener('click', () => {
     buttons[0].removeAttribute('class', 'active')
 })
 
+
+
+function checkPage() {
+    if(window.location.pathname === "/register-section")
+    {
+        document.getElementById('principal_section').classList.add('invisible')
+    }
+}
+
+checkPage()

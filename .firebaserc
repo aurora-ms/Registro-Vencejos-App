@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "db-app-rv",
+    "APP_RV": "db-app-rv"
+  }
+}

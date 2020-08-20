@@ -7,24 +7,25 @@ main
         button.active Inicio de sesión
         button Registro de usuario
       div#initsection.inputsecction
-        form
-          input(type="email", name="", placeholder="Email")
-          input(type="text", name="", placeholder="Contraseña")
+        form(action="/login" method="post")
+          input(type="email", name="loginEmail", placeholder="Email")
+          input( type="password" , name="loginPassword", placeholder="Contraseña")
           input(type="submit", value="Iniciar sesión")
       div#loginsection.inputsecction.invisible
-        form
-          input(type="text", name="", placeholder="Nombre completo")
-          input(type="email", name="", placeholder="Email")
-          input(type="text", name="", placeholder="Contraseña")
+        form(action="/newregister" method="post")
+          input(type="text", name="registerName", placeholder="Nombre completo")
+          input(type="email", name="registerEmail", placeholder="Email")
+          input(type="text", name="registerPassword", placeholder="Contraseña")
           input(type="submit", value="Registrarme")
     div#noregister_section
       div.width_control
         div.flex
           div.smile_face
-            img(src='images/no_register_img.png' alt='')
+            img(src='../images/no_register_img.png' alt='')
           div.subdiv
             h3 Inscripción sin registro
             p Si no te quieres hacer cuenta pero deseas inscribir a tu Vencejo no te preocupes, te lo ponemos facil, lo puedes hacer sin problema pinchando en el botón de abajo.
         div.principal_buttons.complete
             button Inscribir
+  section#register_section
 include components/scripts.pug
