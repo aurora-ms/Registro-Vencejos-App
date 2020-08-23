@@ -203,6 +203,52 @@ a.indvButton {
     transition: 0.7s all ease;
 }
 
+/*Estilos seccion usuario*/
+
+div#imgcontrolSect img {
+    width: 150px;
+}
+
+.headsection div.width_control {
+    justify-content: space-evenly;
+    margin: 0 auto;
+}
+
+.headsection {
+    background: rgb(255 153 0);
+    padding: 20px 0;
+}
+
+div#nameSection h2 {
+    color: white;
+    font-size: 38px;
+    margin: 0;
+}
+
+div#nameSection h3 {
+    font-size: 30px;
+    margin: 0;
+    color: white;
+}
+
+
+div#imgcontrolSect button {
+    font-size: 18px;
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+}
+
+button#edit {
+    background: #517c17;
+}
+
+button#delete {
+    background: #c41818;
+}
+
 /*Estilos generales*/
 
 

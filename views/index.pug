@@ -27,5 +27,20 @@ main
             p Si no te quieres hacer cuenta pero deseas inscribir a tu Vencejo no te preocupes, te lo ponemos facil, lo puedes hacer sin problema pinchando en el botón de abajo.
         div.principal_buttons.complete
             button Inscribir
-  section#register_section
+  section#user_section
+    .headsection
+      .width_control.flex
+        #imgcontrolSect
+          img(src= img, alt="")
+          .flex
+            button#edit 
+              i.fa.fa-pencil
+            button#delete
+              i.fa.fa-trash 
+        #nameSection
+          h2 Bienvenido
+          h3= name
+    .buttonsection
+      button Nuevo registro
+      button Gestionar guardados
 include components/scripts.pug

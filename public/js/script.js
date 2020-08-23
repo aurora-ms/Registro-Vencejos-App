@@ -49,7 +49,8 @@ buttons[1].addEventListener('click', () => {
 
 
 function checkPage() {
-    if(window.location.pathname === "/register-section")
+    console.log(window.location.pathname)
+    if(window.location.pathname.includes("/user/"))
     {
         document.getElementById('principal_section').classList.add('invisible')
     }

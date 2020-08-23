@@ -2,7 +2,7 @@ require('dotenv').config()
 
 
 const { saveNewsJob, saveInfoJob } = require('./jobs/scrapingJob')
-const { generalInfoRoute, newsRoute, createUserRoute, loginUserRoute } = require('./routes/index')
+const { generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter } = require('./routes/index')
 
 const { firebaseConfig } = require('./middleware/firebaseConfig')
 
@@ -34,11 +34,11 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 
-app.get('/', (req, res) => { res.render('index'), saveInfoJob() });
+app.get('/', (req, res) => { res.render('index', {img: null, name:null}), saveInfoJob() });
 app.get('/general_info', generalInfoRoute);
 app.get('/news', newsRoute);
 
-app.get('/user/:userName', (req, res) => { res.render('index') });
+app.get('/user/:userName', userRouter );
 
 
 app.post('/login', loginUserRoute);
