@@ -40,21 +40,21 @@ const createUserRoute = async (req, res) => {
     var userEmail = req.body.registerEmail;
     var userPassword = req.body.registerPassword;
     var result = await createUser(userName, userEmail, userPassword)
-    setTimeout(function () { res.redirect('/user/' + result) }, 3000);
-    // res.redirect('/user/' + result)
+    // setTimeout(function () { res.redirect('/user/' + result) }, 3000);
+    res.redirect('/user/' + result)
 }
 
-const loginUserRoute = (req, res) => {
+const loginUserRoute = async (req, res) => {
     var userEmail = req.body.loginEmail;
     var userPassword = req.body.loginPassword;
-    loginUser(userEmail, userPassword)
+    var result = await loginUser(userEmail, userPassword);
+    res.redirect('/user/' + result.name) 
 
 }
 
 
 const userRouter = async (req, res) => {
     const result = await findUser();
-    console.log(result)
     res.render('index', {img: result.img, name:result.name})
 }
 

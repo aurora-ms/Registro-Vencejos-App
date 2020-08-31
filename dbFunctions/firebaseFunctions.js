@@ -2,8 +2,8 @@ const firebase = require('firebase');
 const { saveIndData, loginDataUser } = require('./dataFunctions')
 
 
-const createUser =  (name, email, password) => {
-    var createUserPromise =  firebase.auth().createUserWithEmailAndPassword(email, password)
+const createUser = (name, email, password) => {
+    var createUserPromise = firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(async () => {
             var uid = firebase.auth().currentUser.uid
             var finalUser = await saveIndData(uid, name, email)
@@ -22,14 +22,20 @@ const createUser =  (name, email, password) => {
 
 const loginUser = (email, password) => {
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    var loginUserPromise = firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(async () => {
+            var uid = firebase.auth().currentUser.uid;
+            var finalUser = await loginDataUser(uid)
+            return finalUser
+        })
         .catch(function (error) {
             // Handle Errors here.
             console.log(error.code);
             console.log(error.message);
             // ...
-
+            return "error"
         })
+    return loginUserPromise
 }
 
 

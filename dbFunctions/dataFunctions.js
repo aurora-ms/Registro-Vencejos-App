@@ -7,10 +7,10 @@ admin.initializeApp({
 
 var db = admin.firestore();
 
-const saveIndData = (uid, name, email) => {
+const saveIndData = async (uid, name, email) => {
     var docRef = db.collection('users').doc(uid).collection('userData').doc('personal_data');
     var standarImg = '../images/users_icons/icon_bird1.png';
-    docRef.set({
+    await docRef.set({
         name: name,
         img: standarImg,
         email: email
@@ -21,7 +21,6 @@ const saveIndData = (uid, name, email) => {
 
 
 const loginDataUser = (uidIndv) => {
-    console.log(uidIndv)
     var indvData = db.collection('users').doc(uidIndv).collection('userData').doc('personal_data').get()
         .then(async doc => {
             if (!doc.exists) {
