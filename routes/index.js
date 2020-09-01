@@ -1,6 +1,23 @@
 const { getGeneralInfo, getNews } = require("../dbFunctions/scrapFunctions")
 const { createUser, loginUser, findUser } = require("../dbFunctions/firebaseFunctions")
+const { saveInfoJob } = require('../jobs/scrapingJob')
+const { checkUser } = require('../dbFunctions/firebaseFunctions')
 
+
+
+const principalRoute = async (req, res) => {
+    saveInfoJob();
+    var result = await checkUser();
+    console.log("USER", result)
+    if(result !== "notUser"){
+        res.redirect('/user/' + result.name)
+    } else {
+        res.render('index', { img: null, name: null })
+    }
+    
+    
+
+}
 
 
 const generalInfoRoute = (req, res) => {
@@ -48,18 +65,19 @@ const loginUserRoute = async (req, res) => {
     var userEmail = req.body.loginEmail;
     var userPassword = req.body.loginPassword;
     var result = await loginUser(userEmail, userPassword);
-    res.redirect('/user/' + result.name) 
+    res.redirect('/user/' + result.name)
 
 }
 
 
 const userRouter = async (req, res) => {
     const result = await findUser();
-    res.render('index', {img: result.img, name:result.name})
+    res.render('index', { img: result.img, name: result.name })
 }
 
 
 module.exports = {
+    principalRoute,
     generalInfoRoute,
     newsRoute,
     createUserRoute,

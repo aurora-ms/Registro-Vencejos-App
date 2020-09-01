@@ -39,15 +39,25 @@ const loginUser = (email, password) => {
 }
 
 
-//Controlar asincronia para que espere a crear el usuario antes de poder buscarlo
 
 const findUser = async () => {
     var uid = firebase.auth().currentUser.uid
-    const userData = await loginDataUser(uid)
+    var userData = await loginDataUser(uid)
     return userData
 
 }
 
+const checkUser = async () => {
+    var user = firebase.auth().currentUser;
+    if (user) {
+        var userData = await loginDataUser(user.uid)
+        return userData
+    } else {
+        return ("notUser")
+    }
+}
+
+
 module.exports = {
-    createUser, loginUser, findUser
+    createUser, loginUser, findUser, checkUser
 }

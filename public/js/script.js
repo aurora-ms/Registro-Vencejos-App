@@ -51,8 +51,12 @@ buttons[1].addEventListener('click', () => {
 function checkPage() {
     console.log(window.location.pathname)
     if(window.location.pathname.includes("/user/"))
-    {
+    { 
+        document.getElementById('homeLink').classList.add('invisible')
         document.getElementById('principal_section').classList.add('invisible')
+    } else {
+        document.getElementById('user_section').classList.add('invisible')
+       
     }
 }
 
