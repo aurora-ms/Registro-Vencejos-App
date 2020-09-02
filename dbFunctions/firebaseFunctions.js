@@ -60,7 +60,7 @@ const checkUser = async () => {
 const deleteUser = () => {
     var user = firebase.auth().currentUser;
     var result = user.delete()
-        .then(async() => {
+        .then(async () => {
             await deleteUserData(user.uid)
             return "userDelete"
         })
@@ -72,6 +72,17 @@ const deleteUser = () => {
 }
 
 
+const closeSesion = () => {
+    var result = firebase.auth().signOut()
+        .then(() => {
+            return "closeSesion"
+        }).catch((error) => {
+            return error
+        });
+    return result
+}
+
+
 module.exports = {
-    createUser, loginUser, findUser, checkUser, deleteUser
+    createUser, loginUser, findUser, checkUser, deleteUser, closeSesion
 }

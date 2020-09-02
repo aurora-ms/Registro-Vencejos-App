@@ -2,7 +2,7 @@ require('dotenv').config()
 
 
 const { saveNewsJob } = require('./jobs/scrapingJob')
-const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRouter } = require('./routes/index');
+const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRoute, closeSesionRoute } = require('./routes/index');
 
 const { firebaseConfig } = require('./middleware/firebaseConfig')
 
@@ -47,7 +47,8 @@ app.get('/error', (req, res) => {
 
 app.post('/login', loginUserRoute);
 app.post('/newregister', createUserRoute);
-app.post('/deleteuser', deleteUserRouter);
+app.post('/deleteuser', deleteUserRoute);
+app.post('/closesesion', closeSesionRoute);
 
 
 

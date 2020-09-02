@@ -217,18 +217,19 @@ div#nameSection h2 {
     color: white;
     font-size: 30px;
     margin: 0;
+    font-weight: 100;
 }
 
 div#nameSection h3 {
-    font-size: 42px;
+    font-size: 47px;
     margin: 0;
     color: white;
 }
 
 div#nameSection button {
-    font-size: 18px;
+    font-size: 14px;
     border: none;
-    margin: 10px 5px;
+    margin: 15px 5px 0;
     padding: 5px 10px;
     color: white;
     cursor: pointer;
@@ -244,6 +245,22 @@ button#edit {
 
 button#delete {
     background: #c41818;
+}
+
+button#closeSeccion {
+    background: #505050;
+}
+
+button#edit:hover {
+    background: #34500f;
+}
+
+button#delete:hover {
+    background: #811111;
+}
+
+button#closeSeccion:hover {
+    background: #2e2e2e;
 }
 
 /*Estilos modal*/

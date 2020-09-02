@@ -49,7 +49,6 @@ const deleteUserData = (uidIndv) => {
 
 
 
-
 module.exports = {
     saveIndData,
     loginDataUser,
