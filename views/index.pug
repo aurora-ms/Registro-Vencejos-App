@@ -8,15 +8,15 @@ main
         button Registro de usuario
       div#initsection.inputsecction
         form(action="/login" method="post")
-          input(type="email", name="loginEmail", placeholder="Email")
-          input( type="password" , name="loginPassword", placeholder="Contraseña")
-          input(type="submit", value="Iniciar sesión")
+          input(type="email" name="loginEmail" placeholder="Email")
+          input( type="password" , name="loginPassword" placeholder="Contraseña")
+          input(type="submit" value="Iniciar sesión")
       div#loginsection.inputsecction.invisible
         form(action="/newregister" method="post")
-          input(type="text", name="registerName", placeholder="Nombre completo")
-          input(type="email", name="registerEmail", placeholder="Email")
-          input(type="text", name="registerPassword", placeholder="Contraseña")
-          input(type="submit", value="Registrarme")
+          input(type="text" name="registerName" placeholder="Nombre completo")
+          input(type="email" name="registerEmail" placeholder="Email")
+          input(type="text" name="registerPassword" placeholder="Contraseña")
+          input(type="submit" value="Registrarme")
     div#noregister_section
       div.width_control
         div.flex
@@ -26,21 +26,36 @@ main
             h3 Inscripción sin registro
             p Si no te quieres hacer cuenta pero deseas inscribir a tu Vencejo no te preocupes, te lo ponemos facil, lo puedes hacer sin problema pinchando en el botón de abajo.
         div.principal_buttons.complete
-            button Inscribir
+          button Inscribir
   section#user_section
     .headsection
       .width_control.flex
         #imgcontrolSect
           img(src= img, alt="")
+        #nameSection
+          h2 Bienvenido
+          h3= name          
           .flex
             button#edit 
               i.fa.fa-pencil
             button#delete
               i.fa.fa-trash 
-        #nameSection
-          h2 Bienvenido
-          h3= name
     .buttonsection
       button Nuevo registro
-      button Gestionar guardados
+      button Gestionar guardados        
+  #myModal.modal.invisible
+    .modal-content
+      .flex.headm
+        h6 ¡Atención!
+        span#closeButton.close &times;
+      hr
+      h5 ¿Esta seguro que desea borrar su cuenta?
+      hr
+      .flex.buttonsm
+        button#noButton No
+        form(action="/deleteuser", method="post")
+          button(type="submit") Borrar
+            i.fa.fa-trash 
+        
+
 include components/scripts.pug

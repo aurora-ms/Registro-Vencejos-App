@@ -1,5 +1,5 @@
 const firebase = require('firebase');
-const { saveIndData, loginDataUser } = require('./dataFunctions')
+const { saveIndData, loginDataUser, deleteUserData } = require('./dataFunctions')
 
 
 const createUser = (name, email, password) => {
@@ -57,7 +57,21 @@ const checkUser = async () => {
     }
 }
 
+const deleteUser = () => {
+    var user = firebase.auth().currentUser;
+    var result = user.delete()
+        .then(async() => {
+            await deleteUserData(user.uid)
+            return "userDelete"
+        })
+        .catch((error) => {
+            return error
+        });
+    return result
+
+}
+
 
 module.exports = {
-    createUser, loginUser, findUser, checkUser
+    createUser, loginUser, findUser, checkUser, deleteUser
 }

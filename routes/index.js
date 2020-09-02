@@ -1,5 +1,5 @@
 const { getGeneralInfo, getNews } = require("../dbFunctions/scrapFunctions")
-const { createUser, loginUser, findUser } = require("../dbFunctions/firebaseFunctions")
+const { createUser, loginUser, findUser, deleteUser } = require("../dbFunctions/firebaseFunctions")
 const { saveInfoJob } = require('../jobs/scrapingJob')
 const { checkUser } = require('../dbFunctions/firebaseFunctions')
 
@@ -8,14 +8,13 @@ const { checkUser } = require('../dbFunctions/firebaseFunctions')
 const principalRoute = async (req, res) => {
     saveInfoJob();
     var result = await checkUser();
-    console.log("USER", result)
-    if(result !== "notUser"){
+    if (result !== "notUser") {
         res.redirect('/user/' + result.name)
     } else {
         res.render('index', { img: null, name: null })
     }
-    
-    
+
+
 
 }
 
@@ -69,10 +68,20 @@ const loginUserRoute = async (req, res) => {
 
 }
 
-
 const userRouter = async (req, res) => {
     const result = await findUser();
     res.render('index', { img: result.img, name: result.name })
+}
+
+const deleteUserRouter = async (req, res) => {
+    var result = await deleteUser();
+    if (result === 'userDelete') {
+        res.render('index', { img: null, name: null });
+    } else {
+        res.redirect('/error')
+    }
+
+
 }
 
 
@@ -82,6 +91,7 @@ module.exports = {
     newsRoute,
     createUserRoute,
     loginUserRoute,
-    userRouter
+    userRouter,
+    deleteUserRouter
 }
 

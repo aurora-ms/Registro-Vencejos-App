@@ -37,10 +37,21 @@ const loginDataUser = (uidIndv) => {
     return indvData
 }
 
+const deleteUserData = (uidIndv) => {
+    db.collection('users').doc(uidIndv).delete()
+    .then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    return
+}
+
 
 
 
 module.exports = {
     saveIndData,
-    loginDataUser
+    loginDataUser,
+    deleteUserData
 }

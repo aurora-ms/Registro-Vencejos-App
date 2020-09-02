@@ -2,7 +2,7 @@ require('dotenv').config()
 
 
 const { saveNewsJob } = require('./jobs/scrapingJob')
-const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter } = require('./routes/index');
+const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRouter } = require('./routes/index');
 
 const { firebaseConfig } = require('./middleware/firebaseConfig')
 
@@ -40,13 +40,16 @@ app.get('/news', newsRoute);
 
 app.get('/user/:userName', userRouter);
 
-
-app.post('/login', loginUserRoute);
-app.post('/newregister', createUserRoute);
-
 app.get('/error', (req, res) => {
     res.render('error')
 });
+
+
+app.post('/login', loginUserRoute);
+app.post('/newregister', createUserRoute);
+app.post('/deleteuser', deleteUserRouter);
+
+
 
 
 schedule.scheduleJob('32 01 * * * *', async () => {

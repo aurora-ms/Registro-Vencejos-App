@@ -50,14 +50,38 @@ buttons[1].addEventListener('click', () => {
 
 function checkPage() {
     console.log(window.location.pathname)
-    if(window.location.pathname.includes("/user/"))
-    { 
+    if (window.location.pathname.includes("/user/")) {
         document.getElementById('homeLink').classList.add('invisible')
         document.getElementById('principal_section').classList.add('invisible')
-    } else {
+    } else if (window.location.pathname.includes("/deleteuser")) {
+        document.getElementById('user_section').classList.add('invisible');
+        document.querySelector('#myModal > .modal-content > .buttonsm').classList.add('invisible');
+        document.getElementById('myModal').classList.remove('invisible');
+        document.querySelectorAll('#myModal > .modal-content > hr')[1].classList.add('invisible');
+        document.querySelector('#myModal > .modal-content > h5').innerText = 'Usuario Borrado correctamente';
+        document.getElementById('closeButton').addEventListener('click', ()=>{
+            window.location.pathname = ''
+        });
+
+    }
+    else {
         document.getElementById('user_section').classList.add('invisible')
-       
     }
 }
 
 checkPage()
+
+
+document.getElementById('delete').addEventListener('click', () => {
+    document.getElementById('myModal').classList.remove('invisible')
+})
+
+document.getElementById('closeButton').addEventListener('click', () => {
+    document.getElementById('myModal').classList.add('invisible')
+})
+
+document.getElementById('noButton').addEventListener('click', () => {
+    document.getElementById('myModal').classList.add('invisible')
+})
+
+
