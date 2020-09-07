@@ -1,5 +1,5 @@
 const firebase = require('firebase');
-const { saveIndData, loginDataUser, deleteUserData } = require('./dataFunctions')
+const { saveIndData, loginDataUser, deleteUserData, saveBirdData, loadBirdData, prueba } = require('./dataFunctions')
 
 
 const createUser = (name, email, password) => {
@@ -82,7 +82,20 @@ const closeSesion = () => {
     return result
 }
 
+const userUid = async (birdata) => {
+    var uid = firebase.auth().currentUser.uid;
+    var saveBird = await saveBirdData(uid, birdata);
+    return saveBird
+
+}
+
+const selectUser =  async() => {
+    var uid = firebase.auth().currentUser.uid;
+     var alldata = await loadBirdData(uid);
+     return alldata
+}
+
 
 module.exports = {
-    createUser, loginUser, findUser, checkUser, deleteUser, closeSesion
+    createUser, loginUser, findUser, checkUser, deleteUser, closeSesion, userUid, selectUser
 }

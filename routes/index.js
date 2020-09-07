@@ -1,7 +1,7 @@
 const { getGeneralInfo, getNews } = require("../dbFunctions/scrapFunctions")
-const { createUser, loginUser, findUser, deleteUser, closeSesion } = require("../dbFunctions/firebaseFunctions")
+const { createUser, loginUser, findUser, deleteUser, closeSesion, checkUser, userUid, selectUser } = require("../dbFunctions/firebaseFunctions")
 const { saveInfoJob } = require('../jobs/scrapingJob')
-const { checkUser } = require('../dbFunctions/firebaseFunctions')
+
 
 
 
@@ -41,6 +41,7 @@ const generalInfoRoute = (req, res) => {
 
 const newsRoute = (req, res) => {
     const data = getNews()
+    console.log(data)
 
     if (!data.length) {
         res.redirect('/error');
@@ -93,6 +94,36 @@ const closeSesionRoute = async (req, res) => {
     }
 }
 
+const birdRegisterRoute = async (req, res) => {
+    const birdata = {
+        especie: req.body.especie,
+        nombreAve: req.body.nombreAve,
+        fechaentrada: req.body.fechaentrada,
+        modo: req.body.modo,
+        pesoentrada: req.body.pesoentrada,
+        localidad: req.body.localidad
+    }
+    // Finalizar mostrar mensaje de que se ha guardado con  éxito
+    var result = await userUid(birdata);
+    if (result === 'savedSuccesfull') {
+        res.redirect('/')
+    } else {
+        res.redirect('/error')
+    }
+
+}
+
+
+const allSavedBirdsRoute = async(req, res) => {
+    const result = await selectUser()
+    console.log(result.length)
+    if (result.length !== 0) {
+        res.render('allbirds', { data: result });
+    } else {
+        res.redirect('/error')
+    }
+
+}
 
 
 module.exports = {
@@ -103,6 +134,8 @@ module.exports = {
     loginUserRoute,
     userRouter,
     deleteUserRoute,
-    closeSesionRoute
+    closeSesionRoute,
+    birdRegisterRoute,
+    allSavedBirdsRoute
 }
 

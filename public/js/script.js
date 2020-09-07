@@ -59,11 +59,10 @@ function checkPage() {
         document.getElementById('myModal').classList.remove('invisible');
         document.querySelectorAll('#myModal > .modal-content > hr')[1].classList.add('invisible');
         document.querySelector('#myModal > .modal-content > h5').innerText = 'Usuario Borrado correctamente';
-        document.getElementById('closeButton').addEventListener('click', ()=>{
+        document.getElementById('closeButton').addEventListener('click', () => {
             window.location.pathname = ''
         });
-
-    }
+    } 
     else {
         document.getElementById('user_section').classList.add('invisible')
     }
@@ -85,3 +84,20 @@ document.getElementById('noButton').addEventListener('click', () => {
 })
 
 
+document.getElementById('new_register_button').addEventListener('click', () => {
+    document.getElementById('new_register').classList.remove('invisible');
+    document.getElementById('user_section').classList.add('invisible');
+    document.getElementsByTagName('nav')[0].classList.add('invisible')
+})
+
+document.getElementById('close_new_register').addEventListener('click', () => {
+    document.getElementById('new_register').classList.add('invisible');
+    document.getElementById('user_section').classList.remove('invisible');
+    document.getElementsByTagName('nav')[0].classList.remove('invisible')
+})
+
+
+document.getElementById('management_button').addEventListener('click', () => {
+    window.location.pathname = '/allsavedbirds'
+
+})

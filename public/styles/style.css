@@ -263,6 +263,182 @@ button#closeSeccion:hover {
     background: #2e2e2e;
 }
 
+
+
+.buttonsection {
+    display: grid;
+    width: 300px;
+    margin: 40px auto;
+}
+
+.buttonsection button {
+    margin: 10px 0;
+    padding: 15px 0;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+
+
+
+/*Estilos nuevo registro aves*/
+
+section#new_register {
+    /* background-color: #eae9fc; */
+    margin: 30px 0;
+}
+
+.bigContent {
+    width: 600px;
+    margin: auto;
+    position: relative;
+    padding: 40px 50px;
+    background: #eae9fc;
+}
+
+#new_register h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 25px;
+    margin: 0;
+    color: #6a65d7;
+    font-weight: 500;
+}
+
+#new_register hr {
+    border: none;
+    height: 2px;
+    background: #6a65d7;
+    margin-bottom: 30px;
+}
+
+#new_register form {
+    display: grid;
+}
+
+#new_register label {
+    margin-bottom: 8px;
+}
+
+#new_register input {
+    margin-bottom: 20px;
+    border-radius: 0;
+    border: none;
+    padding: 10px 0 10px 10px;
+    font-family: 'Montserrat';
+}
+
+#new_register input:focus {
+    background: #f8f8f8;
+}
+
+
+#new_register.close {
+    position: absolute;
+    top: 0;
+}
+
+#new_register span.close {
+    position: absolute;
+    right: 10px;
+    top: -11px;
+    font-size: 60px;
+    font-weight: 200;
+}
+
+
+#new_register .flex {
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#new_register button {
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat';
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+}
+
+
+button#descartar {
+    background: red;
+}
+
+button#guardar {
+    background: green;
+}
+
+
+button#guardar:hover {
+    background: #34500f;
+}
+
+button#descartar:hover {
+    background: #811111;
+}
+
+/*Estilos aves guardadas*/
+
+.dataBird h2 {
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.dataBird {
+    justify-content: space-around!important;
+    max-width: 1305px;
+    margin: 28px auto 0;
+    min-width: 400px;
+    background: #f1f1ff;
+}
+
+.dataBird h4 {margin: 0;}
+
+.dataBird p {
+    margin: 0;
+}
+
+.dataBird div {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #6868e4;
+    height: 77px;
+    display: grid;
+    align-items: center;
+}
+
+.allbirdsButton {
+    max-width: 1305px;
+    min-width: 400px;
+    margin: auto;
+    justify-content: space-between!important;
+    padding: 10px 0 20px;
+    background: #6868e4;
+}
+
+
+
+
+.allbirdsButton button {
+    border: none;
+    margin: 7px 51px;
+    padding: 7px 35px;
+    background: white;
+    font-family: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #3434ab;
+    box-shadow: 0 1px 5px 2px #00000052;
+    cursor: pointer;
+}
+
 /*Estilos modal*/
 
 .modal {
@@ -363,6 +539,10 @@ p {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+}
+
+i {
+    margin-left: 7px;
 }
 
 .flex-flow {

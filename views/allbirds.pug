@@ -1,0 +1,27 @@
+include components/commonHeader.pug
+
+main
+  section#saved_birds
+    each indvData in data
+      .flex.dataBird
+        div
+          h2= indvData.nombreAve   
+        div     
+          h4= indvData.especie
+        div
+          p= indvData.fechaentrada
+        div
+          p= indvData.modo
+        div
+          p= indvData.localidad
+        div
+          p= indvData.pesoentrada
+      .allbirdsButton.flex
+        button.pesos Añadir nuevo peso
+        .changeButtons.flex
+          button Modificar registro
+          button Dar de alta pajarillo
+
+
+
+include components/scripts.pug

@@ -9,7 +9,7 @@ main
       div#initsection.inputsecction
         form(action="/login" method="post")
           input(type="email" name="loginEmail" placeholder="Email")
-          input( type="password" , name="loginPassword" placeholder="Contraseña")
+          input( type="text" , name="loginPassword" placeholder="Contraseña")
           input(type="submit" value="Iniciar sesión")
       div#loginsection.inputsecction.invisible
         form(action="/newregister" method="post")
@@ -40,12 +40,89 @@ main
               i.fa.fa-pencil
             button#delete
               i.fa.fa-trash
-            form(action="/closesesion", method="post")
+            form(action="/closesesion" method="post")
               button#closeSeccion Cerrar sesión 
                 i.fa.fa-power-off 
     .buttonsection
-      button Nuevo registro
-      button Gestionar guardados        
+      button#new_register_button Nuevo registro
+      button#management_button Gestionar guardados  
+  section#new_register.invisible
+    .bigContent
+      h3 Nuevo registro
+      span#close_new_register.close &times;
+      hr
+      form(action="/birdregister" method="post")
+        label(for="especie") Especie:
+        input#especie(type="text" name="especie" required)
+        label(for="nombre") Nombre/Alias:
+        input#nombre(type="text" name="nombreAve" required)
+        h4 Datos de entrada
+        label(for="fechaEntrada") Fecha de entrada:
+        input#fechaEntrada(type="date" name="fechaentrada" required)
+        label(for="modo") Modo de entrada:
+        input#modo(type="text" name="modo")
+        label(for="pesoEntrada") Peso inicial:
+        input#pesoEntrada(type="number" name="pesoentrada" required)
+        label(for="localidadP") Localidad de procedencia:
+        input#localidadP(type="text" name="localidad")
+        p Al guardar este pajarillo se añadirá de forma automática a tus registros que podrás gestionar en el apartado de GESTIONAR GUARDADOS
+        .flex
+          button#descartar Descartar
+            i.fa.fa-trash
+          button#guardar(type="submit") Guardar
+            i.fa.fa-save 
+    //- section#saved_birds
+    //-   each indvData in data
+    //-     each item in indvData
+    //-       h3= indvData.nombreAve
+    //-       p= indvData.pesoentrada
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //- Modal      
   #myModal.modal.invisible
     .modal-content
       .flex.headm
@@ -56,9 +133,9 @@ main
       hr
       .flex.buttonsm
         button#noButton No
-        form(action="/deleteuser", method="post")
+        form(action="/deleteuser" method="post")
           button(type="submit") Borrar
             i.fa.fa-trash 
-        
+
 
 include components/scripts.pug

@@ -2,7 +2,7 @@ require('dotenv').config()
 
 
 const { saveNewsJob } = require('./jobs/scrapingJob')
-const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRoute, closeSesionRoute } = require('./routes/index');
+const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRoute, closeSesionRoute, birdRegisterRoute, allSavedBirdsRoute } = require('./routes/index');
 
 const { firebaseConfig } = require('./middleware/firebaseConfig')
 
@@ -40,6 +40,11 @@ app.get('/news', newsRoute);
 
 app.get('/user/:userName', userRouter);
 
+
+app.get('/allsavedbirds', allSavedBirdsRoute);
+
+
+
 app.get('/error', (req, res) => {
     res.render('error')
 });
@@ -49,7 +54,7 @@ app.post('/login', loginUserRoute);
 app.post('/newregister', createUserRoute);
 app.post('/deleteuser', deleteUserRoute);
 app.post('/closesesion', closeSesionRoute);
-
+app.post('/birdregister', birdRegisterRoute);
 
 
 
