@@ -388,14 +388,14 @@ button#descartar:hover {
 
 .dataBird h2 {
     text-transform: uppercase;
-    margin: 0;
+    font-size: 22px;
+    width: 200px;
+    margin: auto;
+    overflow-wrap: break-word;
 }
 
 .dataBird {
     justify-content: space-around!important;
-    max-width: 1305px;
-    margin: 28px auto 0;
-    min-width: 400px;
     background: #f1f1ff;
 }
 
@@ -439,6 +439,24 @@ button#descartar:hover {
     cursor: pointer;
 }
 
+
+.generalContent {
+    max-width: 1305px;
+    min-width: 400px;
+    margin: 35px auto;
+}
+
+.generalContent h5 {
+    padding: 10px 15px;
+    margin: 0;
+    width: fit-content;
+    background: lightgrey;
+}
+
+section#saved_birds {
+    text-align: center;
+}
+
 /*Estilos modal*/
 
 .modal {
@@ -450,7 +468,6 @@ button#descartar:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -526,6 +543,17 @@ button#descartar:hover {
     font-weight: 500;
     font-size: 15px;
 }
+
+
+
+/*Estilos modal 2*/
+
+
+.modal2 {
+    background-color: rgb(58 84 118);
+}
+
+
 
 /*Estilos generales*/
 

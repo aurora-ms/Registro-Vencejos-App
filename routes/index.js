@@ -1,7 +1,6 @@
 const { getGeneralInfo, getNews } = require("../dbFunctions/scrapFunctions")
-const { createUser, loginUser, findUser, deleteUser, closeSesion, checkUser, userUid, selectUser } = require("../dbFunctions/firebaseFunctions")
+const { createUser, loginUser, findUser, deleteUser, closeSesion, checkUser, userUid, selectUser, birdWeightCollection, newWeightAdd } = require("../dbFunctions/firebaseFunctions")
 const { saveInfoJob } = require('../jobs/scrapingJob')
-
 
 
 
@@ -114,17 +113,41 @@ const birdRegisterRoute = async (req, res) => {
 }
 
 
-const allSavedBirdsRoute = async(req, res) => {
+const allSavedBirdsRoute = async (req, res) => {
     const result = await selectUser()
     console.log(result.length)
     if (result.length !== 0) {
-        res.render('allbirds', { data: result });
+        res.render('allbirds', { data: result, nombreAve: null, fechaentrada: null, pesoentrada: null, selectData: null });
     } else {
         res.redirect('/error')
     }
 
 }
 
+const birdWeightDataRoute = async (req, res) => {
+    var birdId = req.params.birdid;
+    var result = await birdWeightCollection(birdId);
+    if (result.length !== 0) {
+        res.render('allbirds', { data: null, nombreAve: result.nombreAve, fechaentrada: result.fechaentrada, pesoentrada: result.pesoentrada, id: result.id, selectData: null });
+    } else {
+        res.redirect('/error')
+    }
+
+}
+
+
+const newWeightRoute = async (req, res) => {
+    var newWeight = req.body.neweigth;
+    var date = req.body.date;
+    var birdId = req.body.birdId
+    var result = await newWeightAdd(newWeight, date,  birdId);
+    console.log("RESULT",result)
+    if (result === 'setWeightSuccessful') {
+        res.redirect('/allsavedbirds')
+    } else {
+        res.redirect('/error')
+    }
+}
 
 module.exports = {
     principalRoute,
@@ -136,6 +159,8 @@ module.exports = {
     deleteUserRoute,
     closeSesionRoute,
     birdRegisterRoute,
-    allSavedBirdsRoute
+    allSavedBirdsRoute,
+    birdWeightDataRoute,
+    newWeightRoute
 }
 

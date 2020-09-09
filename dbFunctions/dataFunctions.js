@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('../serviceAccountKey.json')
-const { v4: uuidv4 } = require('uuid');
+const shortid = require('shortid');
 
 
 admin.initializeApp({
@@ -50,8 +50,10 @@ const deleteUserData = (uidIndv) => {
 }
 
 const saveBirdData = async (uidIndv, birdata) => {
-    var docRef = db.collection('users').doc(uidIndv).collection('saved_birds').doc(uuidv4());
+    var ids = "bird:" + shortid.generate()
+    var docRef = db.collection('users').doc(uidIndv).collection('saved_birds').doc(ids);
     await docRef.set({
+        id: ids,
         especie: birdata.especie,
         nombreAve: birdata.nombreAve,
         fechaentrada: birdata.fechaentrada,
@@ -66,21 +68,47 @@ const saveBirdData = async (uidIndv, birdata) => {
 
 const loadBirdData = async (uidIndv) => {
     var data = new Array
-    var prueba = await db.collection('users').doc(uidIndv).collection('saved_birds').get()
+    var allbirds = await db.collection('users').doc(uidIndv).collection('saved_birds').get()
         .then(querySnapshot => {
             let docs = querySnapshot.docs;
             for (let doc of docs) {
                 data.push(doc.data());
-            } 
+            }
             return data
         })
         .catch(err => {
             console.log('Error getting documents', err);
         });
-    return prueba
+    return allbirds
 }
 
+const birdWeightData = async (userId, birdid) => {
+    var searchBird = await db.collection('users').doc(userId).collection('saved_birds').doc(birdid)
+        .get()
+        .then(doc => {
+            if (!doc.exists) {
+                console.log('No matching documents.');
+                return;
+            } else {
+                var data = doc.data();
+                return data
+            }
 
+        })
+        .catch(err => {
+            console.log('Error getting documents', err);
+        });
+    return searchBird
+
+}
+
+const newWeightData = async(uid, weight, date, birdId) => {
+    await db.collection('users').doc(uid).collection('saved_birds').doc(birdId)
+        .update({
+            pesos: admin.firestore.FieldValue.arrayUnion(weight + ' Fecha:' + date)
+        })
+    return "setWeightSuccessful"
+}
 
 
 module.exports = {
@@ -88,6 +116,9 @@ module.exports = {
     loginDataUser,
     deleteUserData,
     saveBirdData,
-    loadBirdData
+    loadBirdData,
+    birdWeightData,
+    newWeightData
 
 }
+// git commit -m "Añadidas funcionalidades de añadido de pesos"

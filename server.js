@@ -2,7 +2,9 @@ require('dotenv').config()
 
 
 const { saveNewsJob } = require('./jobs/scrapingJob')
-const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRoute, closeSesionRoute, birdRegisterRoute, allSavedBirdsRoute } = require('./routes/index');
+const { principalRoute, generalInfoRoute, newsRoute, createUserRoute, loginUserRoute, userRouter, deleteUserRoute, closeSesionRoute, birdRegisterRoute, allSavedBirdsRoute, birdWeightDataRoute, 
+    newWeightRoute 
+} = require('./routes/index');
 
 const { firebaseConfig } = require('./middleware/firebaseConfig')
 
@@ -39,7 +41,7 @@ app.get('/general_info', generalInfoRoute);
 app.get('/news', newsRoute);
 
 app.get('/user/:userName', userRouter);
-
+app.get('/birdchanges/:birdid', birdWeightDataRoute);
 
 app.get('/allsavedbirds', allSavedBirdsRoute);
 
@@ -55,7 +57,7 @@ app.post('/newregister', createUserRoute);
 app.post('/deleteuser', deleteUserRoute);
 app.post('/closesesion', closeSesionRoute);
 app.post('/birdregister', birdRegisterRoute);
-
+app.post('/addneweight', newWeightRoute);
 
 
 schedule.scheduleJob('32 01 * * * *', async () => {

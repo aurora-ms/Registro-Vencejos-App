@@ -1,5 +1,5 @@
 const firebase = require('firebase');
-const { saveIndData, loginDataUser, deleteUserData, saveBirdData, loadBirdData, prueba } = require('./dataFunctions')
+const { saveIndData, loginDataUser, deleteUserData, saveBirdData, loadBirdData, birdWeightData, newWeightData } = require('./dataFunctions')
 
 
 const createUser = (name, email, password) => {
@@ -95,7 +95,20 @@ const selectUser =  async() => {
      return alldata
 }
 
+const birdWeightCollection = async(birdid) => {
+    var uid = firebase.auth().currentUser.uid;
+     var alldata = await birdWeightData(uid, birdid);
+     return alldata
+}
+
+
+const newWeightAdd = async (weight, date, birdId)=>{
+    var uid = firebase.auth().currentUser.uid;
+    var addData = await newWeightData(uid, weight, date, birdId )
+    return addData
+}
+
 
 module.exports = {
-    createUser, loginUser, findUser, checkUser, deleteUser, closeSesion, userUid, selectUser
+    createUser, loginUser, findUser, checkUser, deleteUser, closeSesion, userUid, selectUser, birdWeightCollection, newWeightAdd
 }
