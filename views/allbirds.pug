@@ -35,28 +35,29 @@ main
         h6= "Tabla de pesos de " + nombreAve
 
         span#closeButton.close &times;
-      .flex
+      .flex.initialWeight
         div
           p Peso de entrada
             span= fechaentrada
-        div
+        .box
           p= pesoentrada
       each birdweigth in selectData ? selectData : [] 
         .flex
-          div
-            p= birdweigth.nuevafecha
-          div
-            p= birdweigth.nuevopeso
+          .newWeight
+            p= birdweigth
       .flex
         form(action="/addneweight" method="post")
           input(type="hidden" value=id name="birdId")
-          label(for="date") Fecha peso:
-          br
-          input#date(type="date" name="date")
-          label(for="neweigth") Nuevo peso:
-          br
-          input#neweigth(type="text" name="neweigth" placeholder="gr.")
-          button(type="submit") Añadir
+          .flex
+            div
+              label(for="date") Fecha peso:
+              br
+              input#date(type="date" name="date")
+            div
+              label(for="neweigth") Nuevo peso:
+              br
+              input#neweigth(type="text" name="neweigth" placeholder="gr.")
+              button(type="submit") Añadir
 
 
 include components/scripts.pug

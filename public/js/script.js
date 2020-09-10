@@ -86,6 +86,10 @@ function checkPage() {
         }
     } else if (window.location.pathname.includes("/birdchanges")) {
         document.getElementById('myModal').classList.remove('invisible')
+        document.getElementById('closeButton').addEventListener('click', ()=>{
+            document.getElementById('myModal').classList.add('invisible');
+            window.location.pathname ='/allsavedbirds'
+        })
     }
     else {
         document.getElementById('user_section').classList.add('invisible');

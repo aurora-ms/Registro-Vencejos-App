@@ -1,6 +1,90 @@
+/*Estilos generales*/
+
 body {
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
+}
+
+
+p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+i {
+    margin-left: 7px;
+}
+
+.flex-flow {
+    flex-flow: wrap;
+    align-items: baseline;
+}
+
+.active {
+    background-color: #6d6ba5!important;
+    color: white!important;
+}
+
+.active:hover {
+    background: #57567b!important;
+}
+
+:focus {
+    outline: none;
+}
+
+.invisible {
+    display: none;
+}
+
+.complete {
+    border: none!important;
+    margin-top: 20px;
+}
+
+.complete button {
+    width: 100%!important;
+}
+
+.complete button:hover {
+    background-color: #6d6ba5!important;
+    color: white!important;
+}
+
+.width_control {
+    width: 480px;
+    margin: 30px auto;
+}
+
+.max-width {
+    width: 70%;
+    margin: auto;
+}
+
+.subdiv img {
+    margin: 0 30px;
+}
+
+.diferentColor {
+    background: #1f1009;
+    margin-top: 50px;
+    padding: 40px 0;
+}
+
+.justify_left div {
+    margin-right: 30px;
+}
+
+.justify_left {
+    justify-content: left;
+    align-items: baseline;
 }
 
 /*Estilos header*/
@@ -554,86 +638,37 @@ section#saved_birds {
 }
 
 
-
-/*Estilos generales*/
-
-p {
-    font-size: 14px;
-    line-height: 20px;
+.initialWeight {
+    justify-content: space-between;
+    border: 1px solid #a5a5a5;
 }
 
-.flex {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+.initialWeight div {
+    padding: 0px  22px;
 }
 
-i {
-    margin-left: 7px;
+.box {
+    border-left: 1px solid #a5a5a5;
+    background: #3a5476;
+    color: white;
 }
 
-.flex-flow {
-    flex-flow: wrap;
-    align-items: baseline;
+.box p {
+    font-weight: 500;
+    font-size: 16px;
 }
 
-.active {
-    background-color: #6d6ba5!important;
-    color: white!important;
+.newWeight {
+    width: 100%;
+    word-spacing: 190px;
+    border-bottom: 1px solid #a5a5a5;
+    margin-bottom: 30px;
 }
 
-.active:hover {
-    background: #57567b!important;
+.newWeight p {
+    padding: 0px 22px;
 }
 
-:focus {
-    outline: none;
-}
-
-.invisible {
-    display: none;
-}
-
-.complete {
-    border: none!important;
-    margin-top: 20px;
-}
-
-.complete button {
-    width: 100%!important;
-}
-
-.complete button:hover {
-    background-color: #6d6ba5!important;
-    color: white!important;
-}
-
-.width_control {
-    width: 480px;
-    margin: 30px auto;
-}
-
-.max-width {
-    width: 70%;
-    margin: auto;
-}
-
-.subdiv img {
-    margin: 0 30px;
-}
-
-.diferentColor {
-    background: #1f1009;
-    margin-top: 50px;
-    padding: 40px 0;
-}
-
-.justify_left div {
-    margin-right: 30px;
-}
-
-.justify_left {
-    justify-content: left;
-    align-items: baseline;
+.modal2 form {
+    margin-top: 30px;
 }

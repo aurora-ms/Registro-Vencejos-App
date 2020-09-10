@@ -91,6 +91,7 @@ const birdWeightData = async (userId, birdid) => {
                 return;
             } else {
                 var data = doc.data();
+                console.log(data)
                 return data
             }
 
@@ -105,7 +106,7 @@ const birdWeightData = async (userId, birdid) => {
 const newWeightData = async(uid, weight, date, birdId) => {
     await db.collection('users').doc(uid).collection('saved_birds').doc(birdId)
         .update({
-            pesos: admin.firestore.FieldValue.arrayUnion(weight + ' Fecha:' + date)
+            pesos: admin.firestore.FieldValue.arrayUnion(' Fecha:' + date + "/ " + weight + "gr."  )
         })
     return "setWeightSuccessful"
 }
@@ -121,4 +122,3 @@ module.exports = {
     newWeightData
 
 }
-// git commit -m "Añadidas funcionalidades de añadido de pesos"

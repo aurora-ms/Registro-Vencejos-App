@@ -128,7 +128,7 @@ const birdWeightDataRoute = async (req, res) => {
     var birdId = req.params.birdid;
     var result = await birdWeightCollection(birdId);
     if (result.length !== 0) {
-        res.render('allbirds', { data: null, nombreAve: result.nombreAve, fechaentrada: result.fechaentrada, pesoentrada: result.pesoentrada, id: result.id, selectData: null });
+        res.render('allbirds', { data: null, nombreAve: result.nombreAve, fechaentrada: result.fechaentrada, pesoentrada: result.pesoentrada, id: result.id, selectData: result.pesos });
     } else {
         res.redirect('/error')
     }
