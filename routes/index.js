@@ -1,21 +1,16 @@
 const { getGeneralInfo, getNews } = require("../dbFunctions/scrapFunctions")
-const { createUser, loginUser, findUser, deleteUser, closeSesion, checkUser, userUid, selectUser, birdWeightCollection, newWeightAdd } = require("../dbFunctions/firebaseFunctions")
+const {
+    createUser,
+    loginUser,
+    deleteUser,
+    closeSesion,
+    checkUser,
+    birdRegister,
+    allSavedBirds,
+    birdWeight,
+    newWeightAdd
+} = require("../dbFunctions/firebaseFunctions")
 const { saveInfoJob } = require('../jobs/scrapingJob')
-
-
-
-const principalRoute = async (req, res) => {
-    saveInfoJob();
-    var result = await checkUser();
-    if (result !== "notUser") {
-        res.redirect('/user/' + result.name)
-    } else {
-        res.render('index', { img: null, name: null })
-    }
-
-
-
-}
 
 
 const generalInfoRoute = (req, res) => {
@@ -52,84 +47,189 @@ const newsRoute = (req, res) => {
 
 
 const createUserRoute = async (req, res) => {
-    var userName = req.body.registerName;
-    var userEmail = req.body.registerEmail;
-    var userPassword = req.body.registerPassword;
-    var result = await createUser(userName, userEmail, userPassword)
-    // setTimeout(function () { res.redirect('/user/' + result) }, 3000);
-    res.redirect('/user/' + result)
+    try {
+        var userName = req.body.registerName;
+        var userEmail = req.body.registerEmail;
+        var userPassword = req.body.registerPassword;
+        var result = await createUser(userName, userEmail, userPassword)
+        res.redirect('/user/' + result)
+    } catch (error) {
+        // En vez de redirigir a error tienen que saltar mensajes de que ya existe ese usuario
+        res.redirect('/error')
+    }
+
 }
 
 const loginUserRoute = async (req, res) => {
     var userEmail = req.body.loginEmail;
     var userPassword = req.body.loginPassword;
-    var result = await loginUser(userEmail, userPassword);
-    res.redirect('/user/' + result.name)
+    try {
+        var result = await loginUser(userEmail, userPassword);
+        res.redirect('/user/' + result.name)
+    } catch (error) {
+        // En vez de redirigir a error tienen que saltar mensajes de que no existe ese usuario o que la ocntraseña es incorrecta
+        res.redirect('/error')
+    }
+
+
+}
+
+const principalRoute = async (req, res) => {
+    saveInfoJob();
+    try {
+        var userData = await checkUser();
+        if (userData) {
+            res.redirect('/user/' + userData.name)
+        } else {
+            userData = {
+                img: null,
+                name: null,
+            }
+
+
+            var indvBirdData = {
+                nombreAve: null,
+                fechaentrada: null,
+                pesoentrada: null,
+                pesos: null
+            }
+
+            res.render('index', { userData: userData, allBirdsData: null, indvBirdData: indvBirdData })
+        }
+    } catch (error) {
+        res.redirect('/error')
+    }
 
 }
 
 const userRouter = async (req, res) => {
-    const result = await findUser();
-    res.render('index', { img: result.img, name: result.name })
+    try {
+        var userData = await checkUser();
+
+
+
+        var indvBirdData = {
+            nombreAve: null,
+            fechaentrada: null,
+            pesoentrada: null,
+            pesos: null
+        }
+
+        if (userData) {
+
+
+            res.render('index', { userData: userData, allBirdsData: null, indvBirdData: indvBirdData })
+        } else {
+            res.redirect('/')
+        }
+    } catch (error) {
+        res.redirect('/error')
+    }
 }
 
 const deleteUserRoute = async (req, res) => {
-    var result = await deleteUser();
-    if (result === 'userDelete') {
-        res.render('index', { img: null, name: null });
-    } else {
+    try {
+        var deleteResult = await deleteUser();
+        if (deleteResult === 'Successfully') {
+            res.redirect('/');
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
         res.redirect('/error')
     }
 }
 
 
 const closeSesionRoute = async (req, res) => {
-    var result = await closeSesion();
-
-    if (result === 'closeSesion') {
-        res.redirect('/')
-    } else {
+    try {
+        var result = await closeSesion();
+        if (result === 'closeSesion') {
+            res.redirect('/')
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
         res.redirect('/error')
     }
 }
 
-const birdRegisterRoute = async (req, res) => {
-    const birdata = {
-        especie: req.body.especie,
-        nombreAve: req.body.nombreAve,
-        fechaentrada: req.body.fechaentrada,
-        modo: req.body.modo,
-        pesoentrada: req.body.pesoentrada,
-        localidad: req.body.localidad
-    }
-    // Finalizar mostrar mensaje de que se ha guardado con  éxito
-    var result = await userUid(birdata);
-    if (result === 'savedSuccesfull') {
-        res.redirect('/')
-    } else {
-        res.redirect('/error')
-    }
 
+
+
+
+
+
+const birdRegisterRoute = async (req, res) => {
+    try {
+        const birdata = {
+            especie: req.body.especie,
+            nombreAve: req.body.nombreAve,
+            fechaentrada: req.body.fechaentrada,
+            modo: req.body.modo,
+            pesoentrada: req.body.pesoentrada,
+            localidad: req.body.localidad
+        }
+        // Finalizar mostrar mensaje de que se ha guardado con  éxito
+        var result = await birdRegister(birdata);
+        if (result === 'savedSuccesfull') {
+            res.redirect('/')
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
+        res.redirect('/error')
+
+    }
 }
 
 
 const allSavedBirdsRoute = async (req, res) => {
-    const result = await selectUser()
-    console.log(result.length)
-    if (result.length !== 0) {
-        res.render('allbirds', { data: result, nombreAve: null, fechaentrada: null, pesoentrada: null, selectData: null });
-    } else {
+    try {
+        const result = await allSavedBirds()
+        if (result.length !== 0) {
+            var allBirdsData = result;
+            var indvBirdData = {
+                nombreAve: null,
+                fechaentrada: null,
+                pesoentrada: null,
+                pesos: null
+            }
+
+            var userData = {
+                img: null,
+                name: null,
+            }
+
+            res.render('index', { userData: userData, allBirdsData: allBirdsData, indvBirdData: indvBirdData });
+        } else {
+            //No nos tiene que llevar a error hay que mostrar un mensaje diciendo que no hay pajaros guardados
+            res.redirect('/error')
+        }
+    } catch (error) {
         res.redirect('/error')
     }
 
+
 }
 
-const birdWeightDataRoute = async (req, res) => {
+const birdWeightRoute = async (req, res) => {
     var birdId = req.params.birdid;
-    var result = await birdWeightCollection(birdId);
-    if (result.length !== 0) {
-        res.render('allbirds', { data: null, nombreAve: result.nombreAve, fechaentrada: result.fechaentrada, pesoentrada: result.pesoentrada, id: result.id, selectData: result.pesos });
-    } else {
+    try {
+        var result = await birdWeight(birdId);
+        if (result.length !== 0) {
+
+            var indvBirdData = result
+            var userData = {
+                img: null,
+                name: null,
+            }
+
+            res.render('index', { userData: userData, allBirdsData: null, indvBirdData: indvBirdData });
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
         res.redirect('/error')
     }
 
@@ -137,16 +237,40 @@ const birdWeightDataRoute = async (req, res) => {
 
 
 const newWeightRoute = async (req, res) => {
-    var newWeight = req.body.neweigth;
-    var date = req.body.date;
-    var birdId = req.body.birdId
-    var result = await newWeightAdd(newWeight, date,  birdId);
-    console.log("RESULT",result)
-    if (result === 'setWeightSuccessful') {
-        res.redirect('/allsavedbirds')
-    } else {
+    try {
+        var newWeight = req.body.neweigth;
+        var date = req.body.date;
+        var birdId = req.body.birdId
+        var result = await newWeightAdd(newWeight, date, birdId);
+        if (result === 'setWeightSuccessful') {
+            res.redirect('/allsavedbirds')
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
+        return
+    }
+
+}
+
+const birdReleaseRoute = async (req, res) => {
+    var birdId = req.params.birdid;
+    try {
+        var result = await birdWeight(birdId);
+        if (result.length !== 0) {
+            var indvBirdData = result
+            var userData = {
+                img: null,
+                name: null,
+            }
+            res.render('index', { userData: userData, allBirdsData: null, indvBirdData: indvBirdData });
+        } else {
+            res.redirect('/error')
+        }
+    } catch (error) {
         res.redirect('/error')
     }
+
 }
 
 module.exports = {
@@ -160,7 +284,8 @@ module.exports = {
     closeSesionRoute,
     birdRegisterRoute,
     allSavedBirdsRoute,
-    birdWeightDataRoute,
-    newWeightRoute
+    birdWeightRoute,
+    newWeightRoute,
+    birdReleaseRoute
 }
 

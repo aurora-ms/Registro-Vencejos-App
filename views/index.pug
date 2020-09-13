@@ -31,10 +31,10 @@ main
     .headsection
       .width_control.flex
         #imgcontrolSect
-          img(src= img, alt="")
+          img(src= userData.img, alt="")
         #nameSection
           h2 Bienvenido
-          h3= name          
+          h3= userData.name          
           .flex
             button#edit 
               i.fa.fa-pencil
@@ -46,6 +46,7 @@ main
     .buttonsection
       button#new_register_button Nuevo registro
       button#management_button Gestionar guardados  
+
   section#new_register.invisible
     .bigContent
       h3 Nuevo registro
@@ -71,59 +72,76 @@ main
             i.fa.fa-trash
           button#guardar(type="submit") Guardar
             i.fa.fa-save 
-    //- section#saved_birds
-    //-   each indvData in data
-    //-     each item in indvData
-    //-       h3= indvData.nombreAve
-    //-       p= indvData.pesoentrada
+
+  section#saved_birds.invisible
+    button#returnButton Volver 
+      i.fa.fa-history
+    each indvData in allBirdsData ? allBirdsData : []
+      .generalContent
+        h5.allids= indvData.id
+        .flex.dataBird
+          div
+            h2= indvData.nombreAve   
+          div     
+            h4= indvData.especie
+          div
+            p= indvData.fechaentrada
+          div
+            p= indvData.modo
+          div
+            p= indvData.localidad
+          div
+            p Peso inicial
+            p= indvData.pesoentrada + " gr." 
+          div 
+            each birdweigth in indvData.pesos ? indvData.pesos : []
+              p= birdweigth
+        .allbirdsButton.flex
+          button.pesos Añadir nuevo peso
+          .changeButtons.flex
+            button Modificar registro
+            button.altas Dar de alta pajarillo
+
+  section#final_register.invisible
+    .bigContent
+      h3 Dar de alta
+      span#close_new_register.close &times;
+      hr
+      div
+        h2= indvBirdData.nombreAve   
+      div     
+        h4= indvBirdData.especie
+      h4 Datos de entrada
+      div
+        p= "Fecha de entrada: " + indvBirdData.fechaentrada
+      div
+        p= "Modo: " +indvBirdData.modo
+      div
+        p= "Localidad de recogida: " +indvBirdData.localidad
+      div
+        p= "Peso de entrada: " + indvBirdData.pesoentrada + " gr." 
+      div
+        p Peso máximo: gr.
+      form(action="/birdrelease" method="post")
+        h4 Datos de liberacion
+        label(for="fechaLiberacion") Fecha de liberacion:
+        input#fechaLiberacion(type="date" name="fechaliberacion" required)
+        label(for="pesoLiberacion") Peso de liberación:
+        input#pesoLiberacion(type="text" name="pesoLiberacion")
+        label(for="localidadLibe") Localidad de procedencia:
+        input#localidadLibe(type="text" name="localidad")
+        label(for="CdAnilla") Anillado, CD Anilla:
+        input#CdAnilla(type="text" name="CdAnilla")
+        p Al guardar este pajarillo se añadirá de forma automática a tus registros que podrás gestionar en el apartado de GESTIONAR GUARDADOS
+        .flex
+          button#descartar Descartar
+            i.fa.fa-trash
+          button#guardar(type="submit") Guardar
+            i.fa.fa-save 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //- Modal      
-  #myModal.modal.invisible
+  //- Modal Delete user     
+  #deleteModal.modal.invisible
     .modal-content
       .flex.headm
         h6 ¡Atención!
@@ -137,5 +155,36 @@ main
           button(type="submit") Borrar
             i.fa.fa-trash 
 
+
+  //- Modal Añadir pesos Pajaro
+  #addWeightModal.modal.modal2.invisible
+    .modal-content
+      .flex.headm
+        h6= "Tabla de pesos de " + indvBirdData.nombreAve
+
+        span#cbModalBird.close &times;
+      .flex.initialWeight
+        div
+          p Peso de entrada
+            span= indvBirdData.fechaentrada
+        .box
+          p= indvBirdData.pesoentrada
+      each birdweigth in indvBirdData.pesos ? indvBirdData.pesos : [] 
+        .flex
+          .newWeight
+            p= birdweigth
+      .flex
+        form(action="/addneweight" method="post")
+          input(type="hidden" value=indvBirdData.id name="birdId")
+          .flex
+            div
+              label(for="date") Fecha peso:
+              br
+              input#date(type="date" name="date")
+            div
+              label(for="neweigth") Nuevo peso:
+              br
+              input#neweigth(type="text" name="neweigth" placeholder="gr.")
+              button(type="submit") Añadir
 
 include components/scripts.pug

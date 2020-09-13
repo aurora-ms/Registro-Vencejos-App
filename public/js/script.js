@@ -36,15 +36,15 @@ function checkPage() {
         document.getElementById('homeLink').classList.add('invisible')
         document.getElementById('principal_section').classList.add('invisible')
         document.getElementById('delete').addEventListener('click', () => {
-            document.getElementById('myModal').classList.remove('invisible')
+            document.getElementById('deleteModal').classList.remove('invisible')
         })
 
         document.getElementById('closeButton').addEventListener('click', () => {
-            document.getElementById('myModal').classList.add('invisible')
+            document.getElementById('deleteModal').classList.add('invisible')
         })
 
         document.getElementById('noButton').addEventListener('click', () => {
-            document.getElementById('myModal').classList.add('invisible')
+            document.getElementById('deleteModal').classList.add('invisible')
         })
 
 
@@ -76,25 +76,41 @@ function checkPage() {
         });
     }
     else if (window.location.pathname.includes("/allsavedbirds")) {
-        document.getElementById('returnButton').addEventListener('click', ()=>{
-            window.location.pathname =''
+        document.getElementById('principal_section').classList.add('invisible');
+        document.getElementById('user_section').classList.add('invisible');
+        document.getElementById('saved_birds').classList.remove('invisible');
+        document.getElementById('returnButton').addEventListener('click', () => {
+            window.location.pathname = ''
         })
         var allweightButtons = document.querySelectorAll('.pesos ');
         for (var i = 0; i < allweightButtons.length; i++) {
             console.log(i)
             allweightButtons[i].addEventListener('click', changeurl(i));
         }
+
+        var allRegisterButtons = document.querySelectorAll('.altas ');
+        for (var i = 0; i < allRegisterButtons.length; i++) {
+            console.log(i)
+            allRegisterButtons[i].addEventListener('click', changeurlRegister(i));
+        }
+
     } else if (window.location.pathname.includes("/birdchanges")) {
-        document.getElementById('myModal').classList.remove('invisible')
-        document.getElementById('closeButton').addEventListener('click', ()=>{
-            document.getElementById('myModal').classList.add('invisible');
-            window.location.pathname ='/allsavedbirds'
+        document.getElementById('principal_section').classList.add('invisible');
+        document.getElementById('user_section').classList.add('invisible');
+        document.getElementById('addWeightModal').classList.remove('invisible')
+        document.getElementById('cbModalBird').addEventListener('click', () => {
+            document.getElementById('addWeightModal').classList.add('invisible');
+            window.location.pathname = '/allsavedbirds'
         })
+    } else if (window.location.pathname.includes("/finalregister")) {
+        document.getElementById('principal_section').classList.add('invisible');
+        document.getElementById('user_section').classList.add('invisible');
+        document.getElementById('final_register').classList.remove('invisible')
+
     }
     else {
         document.getElementById('user_section').classList.add('invisible');
         //Cambio de inicio de sesión a login
-
 
         var buttons = document.querySelectorAll('#principal_section > div > div> button')
 
@@ -117,11 +133,16 @@ function checkPage() {
 
 checkPage()
 
-
-
 function changeurl(n) {
     return function () {
         var selectBird = document.querySelectorAll('.generalContent >h5')
         window.location.pathname = '/birdchanges/' + selectBird[n].textContent;
+    }
+}
+
+function changeurlRegister(n) {
+    return function () {
+        var selectBird = document.querySelectorAll('.generalContent >h5')
+        window.location.pathname = '/finalregister/' + selectBird[n].textContent;
     }
 }
