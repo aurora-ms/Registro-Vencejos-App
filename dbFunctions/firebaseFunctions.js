@@ -1,4 +1,7 @@
 const firebase = require('firebase');
+const { firebaseConfig } = require('../middleware/firebaseConfig');
+ firebase.initializeApp(firebaseConfig);
+
 const { saveIndData, loginDataUser, deleteUserData, birdRegisterData, loadBirdData, birdWeightData, newWeightData } = require('./dataFunctions')
 
 
@@ -17,11 +20,11 @@ const createUser = (name, email, password) => {
                     return newUser
                 }
             } catch (error) {
-                return
+                return 
             }
         })
         .catch((error) => {
-            return
+            return 'error'
 
         })
     return createUserPromise
@@ -42,7 +45,7 @@ const loginUser = (email, password) => {
             }
         })
         .catch((error) => {
-            return
+            return 'error'
         })
 
     return loginUserPromise
@@ -73,15 +76,16 @@ const deleteUser = async () => {
                     var deleteUser = await deleteUserData(user.uid)
                     return deleteUser
                 } catch (error) {
-                    return
+                    return 'error'
                 }
+
             })
-            .catch(() => {
+            .catch((error) => {
                 return
             });
         return deleteUserResult
     } catch (error) {
-        return
+        return 'error'
     }
 
 
@@ -155,6 +159,7 @@ const newWeightAdd = async (weight, date, birdId) => {
         var addData = await newWeightData(user.uid, weight, date, birdId)
         return addData
     } catch (error) {
+        console.log("ERROR FIREBASE")
         return
     }
 

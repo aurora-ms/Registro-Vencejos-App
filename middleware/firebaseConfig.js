@@ -1,5 +1,5 @@
 var firebaseConfig = {
-  apiKey: process.env.APIKEY,
+  apiKey: "AIzaSyDpydKgxswj0xxQx1dlsjQnQpljNkugDbo",
   authDomain: process.env.AUTHDOMAIN,
   databaseURL: process.env.DATABASEURL,
   projectId: process.env.PROYECTID,

@@ -17,27 +17,21 @@ const {
     birdReleaseRoute
 } = require('./routes/index');
 
-const { firebaseConfig } = require('./middleware/firebaseConfig')
+// const firebase = require('firebase');
+// const { firebaseConfig } = require('./middleware/firebaseConfig');
+// var firebaseApp = firebase.initializeApp(firebaseConfig);
+
 
 
 const schedule = require('node-schedule');
 const express = require('express');
 const bodyParser = require('body-parser');
-const firebase = require('firebase');
+
 const pug = require('pug');
 const app = express()
 
 
-// const admin = require("firebase-admin");
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: firebaseConfig.databaseURL
-// });
 
-
-// var db = admin.database();
-
-firebase.initializeApp(firebaseConfig);
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -87,4 +81,6 @@ schedule.scheduleJob('32 01 * * * *', async () => {
 app.listen(process.env.PORT || 3000)
 
 
-
+module.exports ={
+    firebaseApp
+}

@@ -5,4 +5,5 @@ node_modules
 firebase.json
 database.rules.json
 serviceAccountKey.json
+middleware/firebaseConfig.js
 

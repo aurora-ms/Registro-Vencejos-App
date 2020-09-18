@@ -47,17 +47,17 @@ const newsRoute = (req, res) => {
 
 
 const createUserRoute = async (req, res) => {
-    try {
-        var userName = req.body.registerName;
-        var userEmail = req.body.registerEmail;
-        var userPassword = req.body.registerPassword;
-        var result = await createUser(userName, userEmail, userPassword)
+    var userName = req.body.registerName;
+    var userEmail = req.body.registerEmail;
+    var userPassword = req.body.registerPassword;
+    var result = await createUser(userName, userEmail, userPassword)
+
+    if (result === userName) {
         res.redirect('/user/' + result)
-    } catch (error) {
-        // En vez de redirigir a error tienen que saltar mensajes de que ya existe ese usuario
+    }
+    else {
         res.redirect('/error')
     }
-
 }
 
 const loginUserRoute = async (req, res) => {
@@ -245,9 +245,11 @@ const newWeightRoute = async (req, res) => {
         if (result === 'setWeightSuccessful') {
             res.redirect('/allsavedbirds')
         } else {
+            console.log("ERROR INDEX ELSE")
             res.redirect('/error')
         }
     } catch (error) {
+        console.log("ERROR INDEX CATCH")
         return
     }
 

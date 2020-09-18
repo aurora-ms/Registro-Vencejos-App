@@ -2,10 +2,12 @@ const admin = require('firebase-admin');
 const serviceAccount = require('../serviceAccountKey.json')
 const shortid = require('shortid');
 
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+}
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
 
 var db = admin.firestore();
 
@@ -24,7 +26,7 @@ const saveIndData = async (userUid, name, email) => {
             });
         return name
     } catch (error) {
-        return
+        return 'error'
     }
 }
 
@@ -45,19 +47,16 @@ const loginDataUser = async (userUid) => {
 
 }
 
+
 const deleteUserData = async (uidIndv) => {
     try {
         await db.collection('users').doc(uidIndv).delete()
         return "Successfully";
     } catch (error) {
-        return
+        return "error";
     }
 
-
 }
-
-
-
 
 
 const birdRegisterData = async (uidIndv, birdata) => {
@@ -75,44 +74,42 @@ const birdRegisterData = async (uidIndv, birdata) => {
             });
         return "savedSuccesfull"
     } catch (error) {
-        return
+        return 'error'
     }
 }
-
-
-
 
 
 const loadBirdData = async (uidIndv) => {
     try {
         var data = new Array
         var allbirds = await db.collection('users').doc(uidIndv).collection('saved_birds').get()
-            .then(querySnapshot => {
-                let docs = querySnapshot.docs;
-                for (let doc of docs) {
-                    data.push(doc.data());
-                }
-                return data
-            })
-            .catch(err => {
-                console.log('Error getting documents', err);
-            });
-        return allbirds
+
+        let docs = allbirds.docs;
+        for (let doc of docs) {
+            data.push(doc.data());
+        }
+        return data
+
     } catch (error) {
-        console.log(error)
+        return 'error'
     }
 
 }
 
 const birdWeightData = async (userId, birdid) => {
-    var searchBird = await db.collection('users').doc(userId).collection('saved_birds').doc(birdid).get()
-    if (!searchBird.exists) {
-        console.log('No matching documents.');
-        return;
-    } else {
-        var data = searchBird.data();
-        return data
+    try {
+        var searchBird = await db.collection('users').doc(userId).collection('saved_birds').doc(birdid).get()
+        if (!searchBird.exists) {
+            console.log('No matching documents.');
+            return 'error';
+        } else {
+            var data = searchBird.data();
+            return data
+        }
+    } catch (error) {
+        return 'error'
     }
+
 
 }
 
@@ -121,14 +118,13 @@ const newWeightData = async (uid, weight, date, birdId) => {
         await db.collection('users').doc(uid).collection('saved_birds').doc(birdId)
             .update({
                 pesos: admin.firestore.FieldValue.arrayUnion(' Fecha:' + date + "/ " + weight + "gr.")
+
             })
         return "setWeightSuccessful"
     } catch (error) {
-        return
+        return 'error'
     }
-
 }
-
 
 module.exports = {
     saveIndData,
