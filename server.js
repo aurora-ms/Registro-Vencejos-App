@@ -17,11 +17,6 @@ const {
     birdReleaseRoute
 } = require('./routes/index');
 
-// const firebase = require('firebase');
-// const { firebaseConfig } = require('./middleware/firebaseConfig');
-// var firebaseApp = firebase.initializeApp(firebaseConfig);
-
-
 
 const schedule = require('node-schedule');
 const express = require('express');
@@ -79,8 +74,3 @@ schedule.scheduleJob('32 01 * * * *', async () => {
 
 
 app.listen(process.env.PORT || 3000)
-
-
-module.exports ={
-    firebaseApp
-}
